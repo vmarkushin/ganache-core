@@ -217,6 +217,7 @@ describe("server", () => {
 
         try {
           await setup();
+          await new Promise(resolve => setTimeout(resolve, 500));
           if (!uncaughtExceptionOccurred) {
             assert.fail("Successfully listened twice on the same port instead of erroring");
           }
@@ -227,8 +228,10 @@ describe("server", () => {
             assert.notStrictEqual(expectedErrorRegex.exec(e.message), `Received unexpected error: ${e.message}`);
           }
         } finally {
-          await localTearDown();
-          resolve();
+          if (!uncaughtExceptionOccurred) {
+            await localTearDown();
+            resolve();
+          }
         }
       })
     });
@@ -272,6 +275,7 @@ describe("server", () => {
           const s = Ganache.server();
           const listen = promisify(s.listen.bind(s));
           await listen(port);
+          await new Promise(resolve => setTimeout(resolve, 500));
           if (!uncaughtExceptionOccurred) {
             assert.fail("Successfully listened twice on the same port instead of erroring");
           }
@@ -282,8 +286,10 @@ describe("server", () => {
             assert.notStrictEqual(expectedErrorRegex.exec(e.message), `Received unexpected error: ${e.message}`);
           }
         } finally {
-          await localTearDown();
-          resolve();
+          if (!uncaughtExceptionOccurred) {
+            await localTearDown();
+            resolve();
+          }
         }
       })
     });
@@ -327,6 +333,7 @@ describe("server", () => {
 
         try {
           await s2.listen(port);
+          await new Promise(resolve => setTimeout(resolve, 500));
           if (!uncaughtExceptionOccurred) {
             assert.fail("Successfully listened twice on the same port instead of erroring");
           }
@@ -337,8 +344,10 @@ describe("server", () => {
             assert.notStrictEqual(expectedErrorRegex.exec(e.message), `Received unexpected error: ${e.message}`);
           }
         } finally {
-          await localTearDown();
-          resolve();
+          if (!uncaughtExceptionOccurred) {
+            await localTearDown();
+            resolve();
+          }
         }
       })
     });
