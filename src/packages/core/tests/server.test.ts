@@ -188,7 +188,7 @@ describe("server", () => {
         const server = http.createServer();
         server.listen(port);
 
-        const expectedError = `listen EADDRINUSE: address already in use 127.0.0.1:${port}`;
+        const expectedErrorRegex = new RegExp(`EADDRINUSE.*${port}`);
 
         const localTearDown = async () => {
           process.removeListener("uncaughtException", handleUncaughtException);
@@ -205,7 +205,7 @@ describe("server", () => {
 
         const handleUncaughtException = async (err) => {
           await localTearDown();
-          assert.ok(err.message.includes(expectedError));
+          assert.notStrictEqual(expectedErrorRegex.exec(err.message), `Received unexpected error: ${err.message}`);
           resolve();
         };
 
@@ -220,7 +220,7 @@ describe("server", () => {
           if (e.code === "ERR_ASSERTION") {
             throw e;
           } else {
-            assert.ok(e.message.includes(expectedError), e.message);
+            assert.notStrictEqual(expectedErrorRegex.exec(e.message), `Received unexpected error: ${e.message}`);
           }
         } finally {
           await localTearDown();
@@ -234,7 +234,7 @@ describe("server", () => {
         const server = http.createServer();
         server.listen(port);
 
-        const expectedError = `listen EADDRINUSE: address already in use 127.0.0.1:${port}`;
+        const expectedErrorRegex = new RegExp(`EADDRINUSE.*${port}`);
 
         const localTearDown = async () => {
           process.removeListener("uncaughtException", handleUncaughtException);
@@ -251,7 +251,7 @@ describe("server", () => {
 
         const handleUncaughtException = async (err) => {
           await localTearDown();
-          assert.ok(err.message.includes(expectedError));
+          assert.notStrictEqual(expectedErrorRegex.exec(err.message), `Received unexpected error: ${err.message}`);
           resolve();
         };
 
@@ -271,7 +271,7 @@ describe("server", () => {
           if (e.code === "ERR_ASSERTION") {
             throw e;
           } else {
-            assert.ok(e.message.includes(expectedError), e.message);
+            assert.notStrictEqual(expectedErrorRegex.exec(e.message), `Received unexpected error: ${e.message}`);
           }
         } finally {
           await localTearDown();
@@ -290,7 +290,7 @@ describe("server", () => {
         // the TS file, causing missing #<var> private variables
         const s2 = Ganache.server();
 
-        const expectedError = `listen EADDRINUSE: address already in use 127.0.0.1:${port}`;
+        const expectedErrorRegex = new RegExp(`EADDRINUSE.*${port}`);
 
         const localTearDown = async () => {
           process.removeListener("uncaughtException", handleUncaughtException);
@@ -307,7 +307,7 @@ describe("server", () => {
 
         const handleUncaughtException = async (err) => {
           await localTearDown();
-          assert.ok(err.message.includes(expectedError));
+          assert.notStrictEqual(expectedErrorRegex.exec(err.message), `Received unexpected error: ${err.message}`);
           resolve();
         };
 
@@ -322,7 +322,7 @@ describe("server", () => {
           if (e.code === "ERR_ASSERTION") {
             throw e;
           } else {
-            assert.ok(e.message.includes(expectedError), e.message);
+            assert.notStrictEqual(expectedErrorRegex.exec(e.message), `Received unexpected error: ${e.message}`);
           }
         } finally {
           await localTearDown();          console.log(12);
