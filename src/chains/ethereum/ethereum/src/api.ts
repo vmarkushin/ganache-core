@@ -1796,6 +1796,7 @@ export default class EthereumApi implements types.Api {
     blockNumber: string | Buffer | Tag = Tag.LATEST,
     overrides: SimulationOverrides = {}
   ) {
+    console.log("eth call", overrides);
     const blockchain = this.#blockchain;
     const blocks = blockchain.blocks;
     const parentBlock = await blocks.get(blockNumber);
