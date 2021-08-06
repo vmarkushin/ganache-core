@@ -32,7 +32,7 @@ const base: webpack.Configuration = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"]
   },
-  externals: ["@ganache/filecoin"],
+  externals: [],
   output: {
     filename: "ganache.min.js",
     library: "Ganache",

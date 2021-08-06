@@ -49,8 +49,7 @@
     "truffle"
   ],
   "devDependencies": {
-    "@ganache/core": "0.1.0",
-    "@ganache/filecoin-types": "0.1.5"
+    "@ganache/core": "0.1.0"
   },
   "dependencies": {
     "@ganache/colors": "^0.1.0",

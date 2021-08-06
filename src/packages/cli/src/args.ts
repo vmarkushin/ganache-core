@@ -2,7 +2,6 @@ import { TruffleColors } from "@ganache/colors";
 import yargs, { Options } from "yargs";
 import {
   DefaultFlavor,
-  FilecoinFlavorName,
   DefaultOptionsByName
 } from "@ganache/flavors";
 import {
@@ -131,10 +130,6 @@ export default function (version: string, isDocker: boolean) {
     let defaultPort: number;
     switch (flavor) {
       // since "ethereum" is the DefaultFlavor we don't need a `case` for it
-      case FilecoinFlavorName:
-        command = flavor;
-        defaultPort = 7777;
-        break;
       case DefaultFlavor:
         command = ["$0", flavor];
         defaultPort = 8545;
